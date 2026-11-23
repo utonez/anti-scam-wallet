@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "log-spec-task-to-kiro-log",
+      "description": "After each spec task, append one line to docs/kiro-log.md. This log feeds the hackathon write-up on how Kiro was used.",
+      "trigger": "PostTaskExec",
+      "action": {
+        "type": "agent",
+        "prompt": "A spec task just finished. Append exactly one new row to the table in docs/kiro-log.md with: today's date, the spec name and task number, which Kiro feature did the work (spec task / hook / steering / MCP / PBT / vibe), a one-sentence outcome, and whether anything went wrong or needed human correction. Do not rewrite existing rows."
+      }
+    }
+  ]
+}

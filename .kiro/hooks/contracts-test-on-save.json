@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "forge-test-on-sol-save",
+      "description": "Run the Foundry test suite whenever the agent edits a Solidity file, so rule regressions surface immediately.",
+      "trigger": "PostFileSave",
+      "matcher": "contracts[\\\\/].*\\.sol$",
+      "action": { "type": "command", "command": "forge test --root contracts" },
+      "timeout": 300
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "invariant-review-on-risk-change",
+      "description": "After the agent edits risk-engine, agent or server code, re-check the core safety invariant: the LLM can only add friction, never release a transaction.",
+      "trigger": "PostFileSave",
+      "matcher": "(packages[\\\\/]risk|server|app[\\\\/].*(agent|risk))[\\\\/].*\\.(ts|tsx)$",
+      "action": {
+        "type": "agent",
+        "prompt": "You just edited risk/agent/server code. Before continuing, check the change against .kiro/steering/safety-invariants.md: (1) can any LLM output, error or timeout lower the required approval level or cause a transaction to be sent without the checks the rules require? (2) do LLM failures fail closed (REQUIRE_GUARDIAN or BLOCK)? (3) is any key, mnemonic or personal data sent to the LLM? If any answer is a problem, fix it and add or update a property-based test that would have caught it. Report the result in one or two lines."
+      }
+    }
+  ]
+}
